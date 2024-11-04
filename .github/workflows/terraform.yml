@@ -8,6 +8,13 @@ on:
   pull_request:
     branches:
       - main
+  # Manual trigger for destroy using workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      destroy:
+        description: "Run terraform destroy"
+        required: true
+        default: "false"      
 
 jobs:
   terraform:
