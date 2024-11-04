@@ -14,7 +14,11 @@ on:
       destroy:
         description: "Run terraform destroy"
         required: true
-        default: "false"      
+        default: "false"
+      apply:
+        description: "Run terraform Apply"
+        required: true
+        default: "false"         
 
 jobs:
   terraform:
@@ -53,7 +57,12 @@ jobs:
         id: plan
         run: terraform plan
 
-      # Step 7: Terraform Apply (only on push to main)
+      # Step 7: Terraform Apply (only on push to main as well as manual trigger )
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.apply == 'true' && github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve
+        
+      # Step 8: Terraform Destroy (only on push to main as well as manual trigger )
+      - name: Terraform Destroy
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.destroy == 'true' && github.ref == 'refs/heads/main'
+        run: terraform destroy -auto-approve
