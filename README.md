@@ -24,5 +24,5 @@ This repository contains Terraform configuration files for deploying an Amazon E
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/krishnasravi/Helm-demo.git
-cd helm-demo
+git clone https://github.com/krishnasravi/Terraform-infra.git
+cd Terraform-infra
